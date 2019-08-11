@@ -8,6 +8,7 @@ using Jasarsoft.GraniteHouse.Models;
 
 namespace Jasarsoft.GraniteHouse.Controllers
 {
+    [Area("Customer")]
     public class HomeController : Controller
     {
         public IActionResult Index()
