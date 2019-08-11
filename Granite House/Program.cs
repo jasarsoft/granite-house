@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace Granite_House
+namespace Jasarsoft.GraniteHouse
 {
     public class Program
     {

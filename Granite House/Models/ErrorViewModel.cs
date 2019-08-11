@@ -1,6 +1,6 @@
 using System;
 
-namespace Granite_House.Models
+namespace Jasarsoft.GraniteHouse.Models
 {
     public class ErrorViewModel
     {

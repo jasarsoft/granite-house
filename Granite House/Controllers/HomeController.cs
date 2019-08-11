@@ -4,9 +4,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Granite_House.Models;
+using Jasarsoft.GraniteHouse.Models;
 
-namespace Granite_House.Controllers
+namespace Jasarsoft.GraniteHouse.Controllers
 {
     public class HomeController : Controller
     {

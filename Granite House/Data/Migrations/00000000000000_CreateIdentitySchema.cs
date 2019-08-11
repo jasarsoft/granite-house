@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Granite_House.Data.Migrations
+namespace Jasarsoft.GraniteHouse.Data.Migrations
 {
     public partial class CreateIdentitySchema : Migration
     {
