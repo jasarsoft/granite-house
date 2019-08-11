@@ -3,6 +3,8 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <UserSecretsId>aspnet-Granite_House-C5FA6A19-EC9F-48F3-8758-FD2F712CAEC7</UserSecretsId>
+    <AssemblyName>GraniteHouse</AssemblyName>
+    <RootNamespace>Jasarsoft.GraniteHouse</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
