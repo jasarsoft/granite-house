@@ -12,7 +12,7 @@ namespace Granite_House.Controllers
 {
     public class ProductsController : Controller
     {
-        private readonly ApplicationDbContext _db { get; set; }
+        private readonly ApplicationDbContext _db;
 
         [BindProperty]
         public ProductsViewModel ProductsVM { get; set; }
