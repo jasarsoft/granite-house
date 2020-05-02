@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Granite_House.Controllers
 {
+    [Area("Admin")]
     public class ProductsController : Controller
     {
         private readonly ApplicationDbContext _db;
