@@ -107,5 +107,57 @@ namespace Granite_House.Controllers
 
             return View(ProductsVM);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id)
+        {
+            if (ModelState.IsValid)
+            {
+                string webRootPath = _hostingEnvironment.WebRootPath;
+                var files = HttpContext.Request.Form.Files;
+
+                var productFromDb = _db.Products.Where(x => x.Id == ProductsVM.Products.Id).FirstOrDefault();
+
+                if (files.Count > 0 && files[0] != null)
+                {
+                    // user upload a new image
+                    var uploads = Path.Combine(webRootPath, SD.ImageFolder);
+                    var extension_new = Path.GetExtension(files[0].FileName);
+                    var extension_old = Path.GetExtension(productFromDb.Image);
+
+                    if (System.IO.File.Exists(Path.Combine(uploads, ProductsVM.Products.Id + extension_old)))
+                    {
+                        System.IO.File.Delete(Path.Combine(uploads, ProductsVM.Products.Id + extension_old));
+                    }
+
+                    using (var filestream = new FileStream(Path.Combine(uploads, ProductsVM.Products.Id + extension_new),
+                        FileMode.Create))
+                    {
+                        files[0].CopyTo(filestream);
+                    }
+
+                    ProductsVM.Products.Image = @"\" + SD.ImageFolder + @"\" + ProductsVM.Products.Id + extension_new;
+                }
+
+                if (ProductsVM.Products.Image != null)
+                {
+                    productFromDb.Image = ProductsVM.Products.Image;
+                }
+
+                productFromDb.Name = ProductsVM.Products.Name;
+                productFromDb.Price = ProductsVM.Products.Price;
+                productFromDb.Available = ProductsVM.Products.Available;
+                productFromDb.ProductTypeId = ProductsVM.Products.ProductTypeId;
+                productFromDb.SpecialTagsId = ProductsVM.Products.SpecialTagsId;
+                productFromDb.ShadeColor = ProductsVM.Products.ShadeColor;
+
+                await _db.SaveChangesAsync();
+
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(ProductsVM);
+        }
     }
 }
