@@ -159,5 +159,22 @@ namespace Granite_House.Controllers
 
             return View(ProductsVM);
         }
+
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            ProductsVM.Products = await _db.Products.Include(m => m.SpecialTags).Include(m => m.ProductTypes)
+                .SingleOrDefaultAsync(x => x.Id == id);
+            if (ProductsVM.Products == null)
+            {
+                return NotFound();
+            }
+
+            return View(ProductsVM);
+        }
     }
 }
