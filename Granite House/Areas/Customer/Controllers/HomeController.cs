@@ -22,7 +22,7 @@ namespace Jasarsoft.GraniteHouse.Controllers
         public async Task<IActionResult> Index()
         {
             var productList =
-                await _db.Products.Include(m => m.ProductTypes).Include(m => m - SpecialTags).ToListAsync();
+                await _db.Products.Include(m => m.ProductTypes).Include(m => m.SpecialTags).ToListAsync();
 
             return View(productList);
         }
