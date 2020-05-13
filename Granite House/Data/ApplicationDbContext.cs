@@ -17,5 +17,8 @@ namespace Jasarsoft.GraniteHouse.Data
         public DbSet<ProductTypes> ProductTypes { get; set; }
         public DbSet<SpecialTags> SpecialTags { get; set; }
         public DbSet<Products> Products{ get; set; }
+
+        public DbSet<Appointments> Appointmentses { get; set; }
+        public DbSet<ProductsSelectedForAppointment> ProductsSelectedForAppointments { get; set; }
     }
 }
