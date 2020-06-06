@@ -36,6 +36,7 @@
                 <li class="nav-item"><a asp-area="Admin" asp-controller="ProductTypes" asp-action="Index" class="nav-link">Product Types</a></li>
                 <li class="nav-item"><a asp-area="Admin" asp-controller="SpecialTags" asp-action="Index" class="nav-link">Special Tags</a></li>
                 <li class="nav-item"><a asp-area="Admin" asp-controller="Products" asp-action="Index" class="nav-link">Products</a></li>
+                <li class="nav-item"><a asp-area="Admin" asp-controller="AdminUsers" asp-action="Index" class="nav-link">Admin Users</a></li>
                 
                 @if (HttpContextAccessor.HttpContext.Session.Get<List<int>>("ssShoppingCart") != null)
                 {
