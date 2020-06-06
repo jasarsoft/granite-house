@@ -60,5 +60,32 @@ namespace Jasarsoft.GraniteHouse.Areas.Admin.Controllers
 
             return View(applicationUser);
         }
+
+        public async Task<IActionResult> Delete(string id)
+        {
+            if (id == null || id.Trim().Length == 0)
+            {
+                return NotFound();
+            }
+
+            var userFromDb = await _db.ApplicationUsers.FindAsync(id);
+            if (userFromDb == null)
+            {
+                return NotFound();
+            }
+
+            return View(userFromDb);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirm(string id)
+        {
+            ApplicationUser userFromDb = _db.ApplicationUsers.Where(u => u.Id == id).FirstOrDefault();
+            userFromDb.LockoutEnd = DateTime.Now.AddYears(1000);
+            
+            _db.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
