@@ -20,5 +20,7 @@ namespace Jasarsoft.GraniteHouse.Data
 
         public DbSet<Appointments> Appointmentses { get; set; }
         public DbSet<ProductsSelectedForAppointment> ProductsSelectedForAppointments { get; set; }
+
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
     }
 }
