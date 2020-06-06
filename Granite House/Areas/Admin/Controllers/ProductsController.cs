@@ -7,12 +7,14 @@ using Jasarsoft.GraniteHouse.Data;
 using Jasarsoft.GraniteHouse.Models;
 using Jasarsoft.GraniteHouse.Models.ViewModel;
 using Jasarsoft.GraniteHouse.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting.Internal;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Granite_House.Controllers
 {
+    [Authorize(Roles = SD.SuperAdminEndUser)]
     [Area("Admin")]
     public class ProductsController : Controller
     {

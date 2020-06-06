@@ -4,10 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Jasarsoft.GraniteHouse.Data;
 using Jasarsoft.GraniteHouse.Models;
+using Jasarsoft.GraniteHouse.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Jasarsoft.GraniteHouse.Areas.Admin.Controllers
 {
+    [Authorize(Roles = SD.SuperAdminEndUser)]
     [Area("Admin")]
     public class AdminUsersController : Controller
     {

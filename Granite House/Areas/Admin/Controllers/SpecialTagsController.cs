@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Jasarsoft.GraniteHouse.Areas.Admin.Controllers
 {
+    [Authorize(Roles = SD.SuperAdminEndUser)]
     [Area("Admin")]
     public class SpecialTagsController : Controller
     {
