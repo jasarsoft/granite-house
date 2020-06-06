@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Jasarsoft.GraniteHouse.Data;
+using Jasarsoft.GraniteHouse.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Jasarsoft.GraniteHouse.Areas.Admin.Controllers
@@ -20,6 +21,44 @@ namespace Jasarsoft.GraniteHouse.Areas.Admin.Controllers
         public IActionResult Index()
         {
             return View(_db.ApplicationUsers.ToList());
+        }
+
+        public async Task<IActionResult> Edit(string id)
+        {
+            if (id == null || id.Trim().Length == 0)
+            {
+                return NotFound();
+            }
+
+            var userFromDb = await _db.ApplicationUsers.FindAsync(id);
+            if (userFromDb == null)
+            {
+                return NotFound();
+            }
+
+            return View(userFromDb);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(string id, ApplicationUser applicationUser)
+        {
+            if (id != applicationUser.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                ApplicationUser userFromDb = _db.ApplicationUsers.Where(u => u.Id == id).FirstOrDefault();
+                userFromDb.Name = applicationUser.Name;
+                userFromDb.PhoneNumber = applicationUser.PhoneNumber;
+
+                _db.SaveChanges();
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(applicationUser);
         }
     }
 }
