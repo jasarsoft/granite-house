@@ -1,0 +1,44 @@
+﻿@model Jasarsoft.GraniteHouse.Models.Appointments
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+<h4 class="text-success>Appointment Details</h4>
+
+<div class="container border" style="height: 100px; background-color:aliceblue">
+<div class="col-12">
+    <div class="row" style="padding-top: 10px">
+        <div class="col-2">
+            Full Name
+        </div>
+        <div class="col-3">
+            <input asp-for="@Model.CustomerName" readonly class="form-control"/>
+        </div>
+        <div class="col-2"></div>
+        <div class="col-2">
+            Email
+        </div>
+        <div class="col-3">
+            <input asp-for="@Model.CustomerEmail" readonly class="form-control"/>
+        </div>
+    </div>
+</div>
+<div class="col-12">
+    <div class="row" style="padding-top: 10px">
+        <div class="col-2">
+            Phone Number
+        </div>
+        <div class="col-3">
+            <input asp-for="@Model.CustomerPhoneNumber" readonly class="form-control" />
+        </div>
+        <div class="col-2"></div>
+        <div class="col-2">
+            Date
+        </div>
+        <div class="col-3">
+            <input asp-for="@Model.AppointmentDate" readonly class="form-control" />
+        </div>
+    </div>
+
+</div>
+</div>
