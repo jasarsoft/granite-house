@@ -12,7 +12,7 @@
                     <h6>Full Name</h6>
                 </div>
                 <div class="col-3">
-                    @Html.Editor("searchName", new {htmlAttributes = new {@class="form-control"}})
+                    @Html.Editor("searchName", new { htmlAttributes = new { @class = "form-control" } })
                 </div>
                 <div class="col-2"></div>
                 <div class="col-2">
@@ -27,14 +27,14 @@
                     <h6>Phone Number</h6>
                 </div>
                 <div class="col-3">
-                    @Html.Editor("searchPhone", new {htmlAttributes = new {@class="form-control"}})
+                    @Html.Editor("searchPhone", new { htmlAttributes = new { @class = "form-control" } })
                 </div>
                 <div class="col-2"></div>
                 <div class="col-2">
                     <h6>Appointment Date</h6>
                 </div>
                 <div class="col-3">
-                    @Html.Editor("searchDate", new { htmlAttributes = new { @class = "form-control", @id="datepicker" } })
+                    @Html.Editor("searchDate", new { htmlAttributes = new { @class = "form-control", @id = "datepicker" } })
                 </div>
             </div>
             <div class="row" style="padding-top: 10px">
@@ -98,10 +98,21 @@
                         @Html.DisplayFor(m => item.isConfirmed)
                     </td>
                     <td>
-                        <partial name="_TableButtonPartial" model="item.Id"/>
+                        <partial name="_TableButtonPartial" model="item.Id" />
                     </td>
                 </tr>
             }
         </table>
     </div>
-</form> 
+</form>
+
+@section Scripts
+{
+    <script>
+       
+        $(function() {
+            $("#datepicker").datepicker({
+            });
+        });
+    </script>
+}
