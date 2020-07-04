@@ -75,5 +75,28 @@ namespace Jasarsoft.GraniteHouse.Areas.Admin.Controllers
 
             return View(appointmentVM);
         }
+
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var productList = (IEnumerable<Products>) (from p in _db.Products
+                join a in _db.ProductsSelectedForAppointments
+                    on p.Id equals a.ProductId
+                where a.AppointmentId == id
+                select p).Include("ProductTypes");
+
+            var objAppointmentVM = new AppointmentDetailsViewModel()
+            {
+                Appointment = _db.Appointmentses.Include(a => a.SalesPersion).Where(a => a.Id == id).FirstOrDefault(),
+                SalesPersion = _db.ApplicationUsers.ToList(),
+                Products = productList.ToList()
+            };
+
+            return View(objAppointmentVM);
+        }
     }
 }
