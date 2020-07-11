@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Jasarsoft.GraniteHouse.Models
 {
-    public class PageInfo
+    public class PagingInfo
     {
         public int TotalItems { get; set; }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using Jasarsoft.GraniteHouse.Data;
 using Jasarsoft.GraniteHouse.Models;
@@ -19,13 +20,14 @@ namespace Jasarsoft.GraniteHouse.Areas.Admin.Controllers
     public class AppointmentsController : Controller
     {
         private readonly ApplicationDbContext _db;
+        public int PageSize = 5;
 
         public AppointmentsController(ApplicationDbContext db)
         {
             _db = db;
         }
 
-        public IActionResult Index(string searchName = null, string searchEmail = null, string searchPhone = null, string searchDate = null)
+        public IActionResult Index(int productPage = 1, string searchName = null, string searchEmail = null, string searchPhone = null, string searchDate = null)
         {
             ClaimsPrincipal currentUser = this.User;
             var claimsIdentity = (ClaimsIdentity) this.User.Identity;
@@ -35,6 +37,30 @@ namespace Jasarsoft.GraniteHouse.Areas.Admin.Controllers
             {
                 Appointmentses = new List<Appointments>()
             };
+            
+            StringBuilder param = new StringBuilder();
+
+            param.Append("/Admin/Appointments?productPage=:");
+            param.Append("&searchName");
+            if (searchName != null)
+            {
+                param.Append(searchName);
+            }
+            param.Append("&searchEmail");
+            if (searchEmail != null)
+            {
+                param.Append(searchEmail);
+            }
+            param.Append("&searchPhone");
+            if (searchPhone != null)
+            {
+                param.Append(searchPhone);
+            }
+            param.Append("&searchDate");
+            if (searchDate != null)
+            {
+                param.Append(searchDate);
+            }
 
             appointmentVM.Appointmentses = _db.Appointmentses.Include(a => a.SalesPersion).ToList();
             if (User.IsInRole(SD.AdminEndUser))
@@ -72,6 +98,20 @@ namespace Jasarsoft.GraniteHouse.Areas.Admin.Controllers
                     
                 }
             }
+
+            var count = appointmentVM.Appointmentses.Count;
+
+            appointmentVM.Appointmentses = appointmentVM.Appointmentses.OrderBy(p => p.AppointmentDate)
+                .Skip((productPage - 1) * PageSize)
+                .Take(PageSize).ToList();
+
+            appointmentVM.PagingInfo = new PagingInfo
+            {
+                CurrentPage = productPage,
+                ItemsPerPage = PageSize,
+                TotalItems = count,
+                urlParam = param.ToString()
+            };
 
             return View(appointmentVM);
         }

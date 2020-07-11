@@ -25,7 +25,7 @@ namespace Jasarsoft.GraniteHouse.TagHelpers
         [HtmlAttributeNotBound]
         public ViewContext ViewContext { get; set; }
 
-        public PageInfo PageModel { get; set; }
+        public PagingInfo PageModel { get; set; }
         public string PageAction { get; set; }
         public bool PageClassesEnabled { get; set; }
         public string PageClass { get; set; }
