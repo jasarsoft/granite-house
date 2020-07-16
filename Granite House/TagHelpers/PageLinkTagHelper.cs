@@ -1,24 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Jasarsoft.GraniteHouse.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
+using Jasarsoft.GraniteHouse.Models;
 
 namespace Jasarsoft.GraniteHouse.TagHelpers
 {
     [HtmlTargetElement("div", Attributes = "page-model")]
     public class PageLinkTagHelper : TagHelper
     {
-        private readonly IUrlHelperFactory _helperFactory;
+        private IUrlHelperFactory urlHelperFactory;
 
         public PageLinkTagHelper(IUrlHelperFactory helperFactory)
         {
-            _helperFactory = helperFactory;
+            urlHelperFactory = helperFactory;
         }
 
         [ViewContext]
@@ -34,10 +30,10 @@ namespace Jasarsoft.GraniteHouse.TagHelpers
 
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
-            IUrlHelper urlHelper = _helperFactory.GetUrlHelper(ViewContext);
+            IUrlHelper urlHelper = urlHelperFactory.GetUrlHelper(ViewContext);
             TagBuilder result = new TagBuilder("div");
 
-            for (int i = 1; i < PageModel.totalPage; i++)
+            for (int i = 1; i <= PageModel.totalPage; i++)
             {
                 TagBuilder tag = new TagBuilder("a");
                 string url = PageModel.urlParam.Replace(":", i.ToString());
@@ -47,12 +43,11 @@ namespace Jasarsoft.GraniteHouse.TagHelpers
                     tag.AddCssClass(PageClass);
                     tag.AddCssClass(i == PageModel.CurrentPage ? PageClassSelected : PageClassNormal);
                 }
-
                 tag.InnerHtml.Append(i.ToString());
                 result.InnerHtml.AppendHtml(tag);
             }
-
             output.Content.AppendHtml(result.InnerHtml);
         }
+
     }
 }
